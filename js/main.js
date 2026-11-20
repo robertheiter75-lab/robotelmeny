@@ -94,7 +94,7 @@ function setupReveal() {
   els.forEach(el => io.observe(el));
 }
 
-// ajánlatkérő felugró ablak (Netlify Forms)
+// ajánlatkérő felugró ablak (Web3Forms: a kérés e-mailben érkezik)
 const modal = document.getElementById('ajanlatkeres');
 const form = modal.querySelector('form'), formStatus = modal.querySelector('.form-status');
 function openQuote(e) {
@@ -115,12 +115,13 @@ form.addEventListener('submit', async e => {
   const btn = form.querySelector('button[type="submit"]');
   btn.disabled = true; formStatus.className = 'form-status'; formStatus.textContent = 'Küldés…';
   try {
-    const res = await fetch('/', {
+    const res = await fetch(form.action, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
     });
-    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.message || res.status);
     form.reset();
     formStatus.className = 'form-status ok';
     formStatus.textContent = 'Köszönjük! Megkaptuk az ajánlatkérést, hamarosan jelentkezünk.';

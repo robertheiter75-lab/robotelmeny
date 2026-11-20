@@ -262,9 +262,11 @@
     <button type="button" class="modal-close" aria-label="Bezárás">×</button>
     <h2 id="quote-title">Ajánlatkérés</h2>
     <p class="muted">Add meg a rendezvény adatait, és hamarosan jelentkezünk. A *-gal jelölt mezők kötelezők.</p>
-    <form name="ajanlatkeres" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="quote-form">
-      <input type="hidden" name="form-name" value="ajanlatkeres">
-      <p class="hidden-field"><label>Ezt hagyd üresen: <input name="bot-field"></label></p>
+    <form name="ajanlatkeres" method="POST" action="https://api.web3forms.com/submit" class="quote-form">
+      <input type="hidden" name="access_key" value="8b61ac8c-abd2-4e15-b298-871c03b8df2c">
+      <input type="hidden" name="subject" value="Új ajánlatkérés a robotelmeny.hu oldalról">
+      <input type="hidden" name="from_name" value="robotelmeny.hu">
+      <p class="hidden-field"><label>Ezt hagyd üresen: <input type="checkbox" name="botcheck" tabindex="-1"></label></p>
       <div class="form-row">
         <label>Név *<input type="text" name="nev" required autocomplete="name"></label>
         <label>Telefonszám *<input type="tel" name="telefon" required autocomplete="tel" placeholder="+36 …"></label>
