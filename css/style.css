@@ -150,6 +150,33 @@ nav a:hover { color: var(--sarga); }
 .mail { color: var(--feher); word-break: break-all; text-decoration: none; font-weight: 600; }
 .mail:hover { color: var(--sarga); }
 
+.person .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid var(--sarga); margin-bottom: 6px; }
+.avatar-icon { display: grid; place-items: center; font-size: 48px; background: var(--kartya2); }
+.quote-cta { margin-top: 30px; text-align: center; background: linear-gradient(135deg, #3a2f05, var(--kartya)); border: 2px solid var(--sarga); border-radius: 16px; padding: 34px 20px; }
+.quote-cta h3 { font-family: var(--cim); font-weight: 400; font-size: clamp(26px, 4vw, 38px); text-transform: uppercase; }
+.quote-cta button { border: 0; cursor: pointer; font-family: inherit; }
+
+/* ajánlatkérő ablak */
+.modal { position: fixed; inset: 0; z-index: 110; background: rgba(0,0,0,.8); display: grid; place-items: center; padding: 16px; overflow-y: auto; }
+.modal[hidden] { display: none; }
+.modal-box { position: relative; width: 100%; max-width: 620px; background: var(--kartya); border-top: 5px solid var(--sarga); border-radius: 16px; padding: 30px; animation: modal-in .25s ease-out; }
+@keyframes modal-in { from { opacity: 0; transform: translateY(20px); } }
+.modal-box h2 { margin-bottom: 6px; }
+.modal-close { position: absolute; top: 8px; right: 12px; background: none; border: 0; color: var(--feher); font-size: 38px; cursor: pointer; line-height: 1; }
+.quote-form { display: grid; gap: 14px; margin-top: 16px; }
+.quote-form label { display: grid; gap: 6px; font-weight: 600; font-size: 15px; }
+.quote-form input, .quote-form select, .quote-form textarea { font: inherit; font-weight: 400; color: var(--feher); background: var(--fekete); border: 1px solid #4a4741; border-radius: 10px; padding: 11px 12px; width: 100%; }
+.quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { outline: 2px solid var(--sarga); border-color: transparent; }
+.quote-form input[type="date"] { color-scheme: dark; }
+.quote-form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.quote-form .check input { width: 20px; height: 20px; flex: none; margin-top: 2px; accent-color: var(--sarga); }
+.quote-form button { border: 0; cursor: pointer; font-family: inherit; justify-self: start; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.hidden-field { position: absolute; left: -9999px; }
+.form-status { margin: 0; font-weight: 700; }
+.form-status.ok { color: #7ee07e; }
+.form-status.err { color: #ff8a7a; }
+
 /* lábléc */
 .footer { background: #080807; padding: 50px 0 90px; font-size: 15px; }
 .footer p { margin: 0 0 4px; }
@@ -176,6 +203,9 @@ nav a:hover { color: var(--sarga); }
 
 /* telefon */
 @media (max-width: 760px) {
+  .form-row { grid-template-columns: 1fr; }
+  .modal-box { padding: 24px 18px; }
+  .modal { place-items: start center; }
   .photo-point { grid-template-columns: 1fr; gap: 16px; }
   .show-photo img { aspect-ratio: 4 / 3; object-position: 54% 40%; }
   .show-photo figcaption { position: static; background: var(--kartya); padding: 12px 16px; font-size: 15px; }

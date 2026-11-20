@@ -94,5 +94,43 @@ function setupReveal() {
   els.forEach(el => io.observe(el));
 }
 
+// ajánlatkérő felugró ablak (Netlify Forms)
+const modal = document.getElementById('ajanlatkeres');
+const form = modal.querySelector('form'), formStatus = modal.querySelector('.form-status');
+function openQuote(e) {
+  if (e) e.preventDefault();
+  menu.classList.remove('open');
+  modal.hidden = false; document.body.style.overflow = 'hidden';
+  form.querySelector('input[name="nev"]').focus();
+}
+function closeQuote() { modal.hidden = true; document.body.style.overflow = ''; }
+document.querySelectorAll('[data-open-quote]').forEach(b => b.addEventListener('click', openQuote));
+modal.querySelector('.modal-close').onclick = closeQuote;
+modal.addEventListener('click', e => { if (e.target === modal) closeQuote(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeQuote(); });
+if (location.hash === '#ajanlatkeres') openQuote();
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true; formStatus.className = 'form-status'; formStatus.textContent = 'Küldés…';
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    formStatus.className = 'form-status ok';
+    formStatus.textContent = 'Köszönjük! Megkaptuk az ajánlatkérést, hamarosan jelentkezünk.';
+  } catch (err) {
+    formStatus.className = 'form-status err';
+    formStatus.textContent = 'Nem sikerült elküldeni. Kérjük, hívj minket: +36 70 942 7918';
+  } finally {
+    btn.disabled = false;
+  }
+});
+
 document.getElementById('ev').textContent = new Date().getFullYear();
 Promise.all([renderRobots(), renderGallery()]).then(setupReveal);
