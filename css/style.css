@@ -82,7 +82,6 @@ nav a:hover { color: var(--sarga); }
 .height-ruler.ready .hr-label { animation: hr-fade .5s ease-out 1.1s both; }
 @keyframes hr-grow { from { transform: scaleY(0); } }
 @keyframes hr-fade { from { opacity: 0; } }
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
 
 /* rólunk */
 .two-col { display: grid; grid-template-columns: 2fr 3fr; gap: 50px; align-items: center; }
