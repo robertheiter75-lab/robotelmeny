@@ -1,7 +1,7 @@
 # Decap CMS – szerkesztőfelület (robotelmeny.hu/admin)
 backend:
   name: github
-  repo: GITHUB-FELHASZNALO/robotelmeny   # a GitHub-tároló neve – élesítéskor kell beírni
+  repo: robertheiter75-lab/robotelmeny
   branch: main
 
 locale: hu
