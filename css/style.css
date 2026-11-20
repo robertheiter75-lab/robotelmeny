@@ -74,6 +74,10 @@ nav a:hover { color: var(--sarga); }
 .lead { font-size: 20px; font-weight: 600; }
 
 /* műsor */
+.show-photo { margin: 30px 0 10px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 14px 50px rgba(0,0,0,.6); }
+.show-photo img { width: 100%; aspect-ratio: 1408 / 628; object-fit: cover; }
+.show-photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 20px 16px; text-align: center; font-weight: 700;
+  background: linear-gradient(0deg, rgba(14,13,11,.9), rgba(14,13,11,0)); }
 .steps { list-style: none; padding: 0; margin: 40px 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; position: relative; counter-reset: lepes; }
 .steps::before { content: ""; position: absolute; top: 45px; left: 10%; right: 10%; height: 4px; background: var(--sarga); }
 .steps li { position: relative; text-align: center; counter-increment: lepes; }
@@ -169,6 +173,8 @@ nav a:hover { color: var(--sarga); }
 
 /* telefon */
 @media (max-width: 760px) {
+  .show-photo img { aspect-ratio: 4 / 3; object-position: 54% 40%; }
+  .show-photo figcaption { position: static; background: var(--kartya); padding: 12px 16px; font-size: 15px; }
   .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .section { padding: 60px 0; }
   .menu-btn { display: block; }
