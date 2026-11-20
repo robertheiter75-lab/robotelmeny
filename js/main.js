@@ -132,5 +132,34 @@ form.addEventListener('submit', async e => {
   }
 });
 
+// magasságjelző: a robot feje teteje és talpa az eredeti (6048×4024-es) fotón mérve,
+// innen számoljuk át a képernyőn látható, object-fit: cover-rel kivágott képre
+const RULER = { headY: 1343, footY: 3568, x: 1678, headX: 2389, footX: 1935 };
+const HERO_SOURCES = { 'hero_mobil.jpg': { scale: 900 / 2494, x0: 1232 }, 'hero.jpg': { scale: 2000 / 6048, x0: 0 } };
+const heroEl = document.querySelector('.hero'), heroImg = document.querySelector('.hero-img');
+const ruler = document.querySelector('.height-ruler');
+
+function placeRuler() {
+  if (!heroImg.naturalWidth) return;
+  const file = heroImg.currentSrc.split('/').pop();
+  const src = HERO_SOURCES[file] || HERO_SOURCES['hero.jpg'];
+  const r = heroImg.getBoundingClientRect(), h = heroEl.getBoundingClientRect();
+  const nw = heroImg.naturalWidth, nh = heroImg.naturalHeight;
+  const sc = Math.max(r.width / nw, r.height / nh);
+  const [px, py] = getComputedStyle(heroImg).objectPosition.split(' ').map(v => parseFloat(v) / 100);
+  const ox = (r.width - nw * sc) * px, oy = (r.height - nh * sc) * py;
+  const map = (x, y) => [r.left - h.left + ox + (x - src.x0) * src.scale * sc, r.top - h.top + oy + y * src.scale * sc];
+  const [x, top] = map(RULER.x, RULER.headY), [, bottom] = map(RULER.x, RULER.footY);
+  const [headX] = map(RULER.headX, RULER.headY), [footX] = map(RULER.footX, RULER.footY);
+  const visible = x > 30 && top > 0;
+  ruler.style.cssText = `left:${x}px;top:${top}px;height:${bottom - top}px;display:${visible ? '' : 'none'}`;
+  ruler.querySelector('.hr-top').style.width = `${headX - x + 14}px`;
+  ruler.querySelector('.hr-bottom').style.width = `${footX - x + 14}px`;
+  ruler.classList.add('ready');
+}
+heroImg.addEventListener('load', placeRuler);
+if (heroImg.complete) placeRuler();
+new ResizeObserver(placeRuler).observe(heroEl);
+
 document.getElementById('ev').textContent = new Date().getFullYear();
 Promise.all([renderRobots(), renderGallery()]).then(setupReveal);
