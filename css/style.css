@@ -100,7 +100,7 @@ nav a:hover { color: var(--sarga); }
 /* robotok */
 .robots { display: grid; gap: 30px; margin-top: 30px; }
 .robot { display: grid; grid-template-columns: 2fr 3fr; gap: 0; background: var(--kartya); border-radius: 16px; overflow: hidden; }
-.robot img { width: 100%; height: 100%; max-height: 600px; object-fit: cover; }
+.robot img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 .robot-body { padding: 36px; }
 .robot-body h3 { font-family: var(--cim); font-weight: 400; font-size: 44px; text-transform: uppercase; margin-bottom: 4px; }
 .robot-sub { color: var(--szurke); font-weight: 600; }
@@ -192,7 +192,7 @@ nav a:hover { color: var(--sarga); }
   .height-badge span { font-size: 12px; letter-spacing: 2px; }
   .two-col, .robot { grid-template-columns: 1fr; gap: 30px; }
   .robot { gap: 0; }
-  .robot img { max-height: 460px; object-position: 50% 15%; }
+  .robot img { max-height: 600px; object-position: 50% 0; }
   .robot-body { padding: 26px; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .events { grid-template-columns: 1fr; }
