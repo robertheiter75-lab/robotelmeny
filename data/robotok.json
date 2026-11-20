@@ -1,0 +1,17 @@
+{
+  "robotok": [
+    {
+      "nev": "Űrdongó",
+      "alcim": "A 2,8 méter magas sárga autobot",
+      "kep": "/images/robotok/urdongo.jpg",
+      "leiras": "Világító szemekkel, zenére mozogva és táncolva lép elő a füstből – kicsik és nagyok kedvence. A műsor után a fotóponton bárki közös képet készíthet vele.",
+      "jellemzok": [
+        "Magasság: 2,8 méter",
+        "Világító LED-szemek",
+        "Zenére mozog, táncol, integet",
+        "Látványos belépő füsttel a sátorból",
+        "Fotózkodás a fotóponton"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+# Decap CMS – szerkesztőfelület (robotelmeny.hu/admin)
+backend:
+  name: github
+  repo: GITHUB-FELHASZNALO/robotelmeny   # a GitHub-tároló neve – élesítéskor kell beírni
+  branch: main
+
+locale: hu
+media_folder: images/feltoltes
+public_folder: /images/feltoltes
+
+collections:
+  - name: tartalom
+    label: Tartalom
+    files:
+      - name: robotok
+        label: Robotjaink
+        file: data/robotok.json
+        fields:
+          - name: robotok
+            label: Robotok
+            label_singular: robot
+            widget: list
+            summary: "{{fields.nev}}"
+            fields:
+              - { name: nev, label: Név, widget: string }
+              - { name: alcim, label: Rövid leírás (alcím), widget: string, required: false }
+              - { name: kep, label: Fotó, widget: image }
+              - { name: leiras, label: Bemutatás, widget: text }
+              - name: jellemzok
+                label: Jellemzők
+                label_singular: jellemző
+                widget: list
+                field: { name: jellemzo, label: Jellemző, widget: string }
+      - name: galeria
+        label: Galéria
+        file: data/galeria.json
+        fields:
+          - name: kepek
+            label: Képek
+            label_singular: kép
+            widget: list
+            summary: "{{fields.felirat}}"
+            fields:
+              - { name: kep, label: Fotó, widget: image }
+              - { name: felirat, label: Felirat, widget: string, required: false }
